@@ -4,8 +4,9 @@
 name: Upload Python Package to TEST pypy
 
 on:
-  release:
-    types: [created]
+  push:
+    branches:
+      - master
 
 jobs:
   deploy:
