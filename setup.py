@@ -1,0 +1,79 @@
+# Always prefer setuptools over distutils
+from setuptools import setup, find_packages
+from os import path
+
+here = path.abspath(path.dirname(__file__))
+
+# Get the long description from the README file
+with open(path.join(here, 'README.md'), encoding='utf-8') as f:
+    long_description = f.read()
+
+setup(
+    name='rungutan',
+
+    version='0.0.1',
+
+    description='CLI for Rungutan - the first Load Testing Tool! 100% serverless, '
+                'API driven & accessible for all tech professionals',
+
+    long_description=long_description,
+
+    long_description_content_type='text/markdown',
+
+    url='https://github.com/Rungutan/rungutan-cli',
+
+    author='Rungutan',
+
+    author_email='support@rungutan.com',
+
+    classifiers=[  # Optional
+        # How mature is this project?
+        #   3 - Alpha
+        #   4 - Beta
+        #   5 - Production/Stable
+        'Development Status :: 3 - Alpha',
+
+        # Audience
+        'Intended Audience :: Developers',
+        'Topic :: Software Development :: Build Tools',
+
+        # License
+        'License :: OSI Approved :: MIT License',
+
+        # Supported Python versions
+        'Programming Language :: Python :: 3',
+        'Programming Language :: Python :: 3.5',
+        'Programming Language :: Python :: 3.6',
+        'Programming Language :: Python :: 3.7',
+        'Programming Language :: Python :: 3.8',
+        'Programming Language :: Python :: 3 :: Only',
+    ],
+
+    keywords='rungutan rungutan-cli rungutan_cli cli load testing load-testing load_testing stress'
+             'stress-testing stress_testing api api-testing api_testing api_load_testing api-load-testing'
+             'api_stress_testing api-stress-testing performance performance-testing performance_testing'
+             'api-performance-testing api_performance_testing serverless workflow-testing workflow_testing',
+
+    package_dir={'': 'src'},
+
+    packages=find_packages(where='src'),
+
+    python_requires='>=3.5, <4',
+
+    install_requires=['numpy', 'simplejson', 'requests', 'sentry-sdk'],
+
+    extras_require={
+        'test': ['coverage'],
+    },
+
+    entry_points={
+        'console_scripts': [
+            'rungutan=rungutan:main',
+        ],
+    },
+
+    project_urls={
+        'Bug Reports': 'https://github.com/Rungutan/rungutan-cli/issues',
+        'Source': 'https://github.com/Rungutan/rungutan-cli/',
+    }
+)
