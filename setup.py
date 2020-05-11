@@ -4,7 +4,7 @@ from os import path
 
 here = path.abspath(path.dirname(__file__))
 
-current_version = str('0.0.1')
+current_version = str('0.0.2')
 
 # Get the long description from the README file
 with open(path.join(here, 'README.md'), encoding='utf-8') as f:
@@ -39,7 +39,16 @@ setup(
 
         # Audience
         'Intended Audience :: Developers',
-        'Topic :: Software Development :: Build Tools',
+        'Intended Audience :: Information Technology',
+        'Intended Audience :: System Administrators',
+
+        'Topic :: Software Development :: Testing',
+        'Topic :: Software Development :: Quality Assurance',
+        'Topic :: Software Development :: Testing :: Acceptance',
+        'Topic :: Software Development :: Testing :: BDD',
+        'Topic :: Software Development :: Testing :: Mocking',
+        'Topic :: Software Development :: Testing :: Traffic Generation',
+        'Topic :: Software Development :: Testing :: Unit',
 
         # License
         'License :: OSI Approved :: MIT License',
