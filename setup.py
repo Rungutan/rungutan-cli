@@ -4,7 +4,7 @@ from os import path
 
 here = path.abspath(path.dirname(__file__))
 
-current_version = str('1.0.1')
+current_version = str('1.0.2')
 
 # Get the long description from the README file
 with open(path.join(here, 'README.md'), encoding='utf-8') as f:
@@ -73,7 +73,7 @@ setup(
 
     python_requires='>=3.5, <4',
 
-    install_requires=['numpy', 'simplejson', 'requests', 'sentry-sdk'],
+    install_requires=['simplejson'],
 
     extras_require={
         'test': ['coverage'],
