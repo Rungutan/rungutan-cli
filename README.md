@@ -25,7 +25,44 @@ pip install rungutan
 rungutan configure (--profile some-profile-name)
 ```
 
-* Run a command
+* Check the overall help menu
 ```shell script
-rungutan domains list
+$ rungutan help
+
+usage: rungutan <command> [<args>]
+
+To see help text, you can run:
+    rungutan help
+    rungutan configure --help
+    rungutan domain --help
+    rungutan team --help
+    rungutan results --help
+    rungutan tests --help
+    rungutan crons --help
+
+Rungutan CLI utility for interacting with https://rungutan.com
+
+positional arguments:
+  command     Command to run
+
+optional arguments:
+  -h, --help  show this help message and exit
+
+```
+
+* Check the help menu for a specific command
+```shell script
+$ rungutan domain list --profile rungutan
+{
+    "Domains": [
+        {
+            "domain_name": "rungutan.com",
+            "domain_state": "validated",
+            "validation_method": "DNS",
+            "submitted_date": "2020-01-22T09:43:08Z",
+            "validated_date": "2020-01-22T09:46:19Z",
+            "validation_code": "AQICAHhHp5r6gwXOjYqwtC9i+eAkDkjIWY6fFcvReCnBELkoNQE9gtS6zGZytyLbOH36UN9nAAAAZjBkBgkqhkiG9w0BBwagVzBVAgEAMFAGCSqGSIb3DQEHATAeBglghkgBZQMEAS4wEQQMEaZoxNmA88dZOjH1AgEQgCPHSkRXDs7qGl6lpEqoqA/K0deoSpuhveJihfstbYgTz6nQRg=="
+        }
+    ]
+}
 ```

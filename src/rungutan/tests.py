@@ -59,7 +59,7 @@ def tests(subcommand, profile_name, test_id, test_file, test_public, test_name, 
                     {"test_id": test_id},
                     auth(profile_name)
                 )
-                if len(response["response_json"]) > 0:
+                if "Tests" in response["response_json"]:
                     test_status = str(response["response_json"]['Tests'][0]["test_status"]).upper()
                     if test_status in test_running_status():
                         time.sleep(sleep_timeout())

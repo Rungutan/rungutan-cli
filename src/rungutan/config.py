@@ -15,7 +15,7 @@ def os_env_api_key():
 
 
 def hostname():
-    return "api.staging.rungutan.com"
+    return "api.rungutan.com"
 
 
 def sleep_timeout():
@@ -68,7 +68,7 @@ def path(resource, verb):
             "remove": "/v1/api/cron/remove",
             "get": "/v1/api/cron/get",
             "preview-credits": "/v1/api/tests/preview-credits",
-            "set-sharing": "/v1/api/cron/set-status"
+            "set-status": "/v1/api/cron/set-status"
         },
         "results": {
             "get": "/v1/api/summary-results/get"
