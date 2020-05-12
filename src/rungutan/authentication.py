@@ -20,15 +20,7 @@ def auth_profile(profile_name):
                     local_credentials = json.load(stream)
                     return local_credentials[profile_name]
                 except Exception as e:
-                    print("Encountered error when reading local credentials file:\n")
-                    if str(e) == profile_name or str(e) == "'{}'".format(profile_name) or str(e) == "\"{}\"".format(profile_name):
-                        print("Local profile \"{}\" is not defined. Please run \"rungutan configure --profile {}\"".format(
-                            profile_name,
-                            profile_name
-                        ))
-                    else:
-                        print(e)
-                    exit(1)
+                    return False
     except Exception as e:
         print(str(e))
         exit(1)
