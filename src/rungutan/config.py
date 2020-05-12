@@ -4,3 +4,74 @@ def os_folder():
 
 def os_file():
     return "credentials"
+
+
+def os_env_team_id():
+    return "RUNGUTAN_TEAM_ID"
+
+
+def os_env_api_key():
+    return "RUNGUTAN_API_KEY"
+
+
+def hostname():
+    return "api.staging.rungutan.com"
+
+
+def sleep_timeout():
+    return 10
+
+
+def test_running_status():
+    return ["STARTING", "VALIDATING", "REFRESHING_WORKERS", "STARTING_WORKERS", "RUNNING_LOADTEST",
+            "GENERATE_OVERALL_STATS", "GENERATE_FAILURE_CSV", "GENERATE_REGIONAL_STATS"]
+
+
+def test_error_status():
+    return ["SUBSCRIPTION_INACTIVE", "NOT_ENOUGH_CREDITS", "PAYMENT_FAILURE", "FAILED"]
+
+
+def test_cancelled_status():
+    return ["CANCELLED"]
+
+
+def test_finished_status():
+    return ["FINISHED", "CANCELLED"]
+
+
+def path(resource, verb):
+    rungutan_paths = {
+        "domain": {
+            "list": "/v1/api/domains/list",
+            "add": "/v1/api/domains/add",
+            "remove": "/v1/api/domains/remove",
+            "validate": "/v1/api/domains/validate"
+        },
+        "team": {
+            "list": "/v1/api/membership/list",
+            "add": "/v1/api/membership/add",
+            "remove": "/v1/api/membership/remove",
+            "change": "/v1/api/membership/change",
+            "get": "/v1/api/membership/get"
+        },
+        "tests": {
+            "list": "/v1/api/tests/list",
+            "add": "/v1/api/tests/add",
+            "cancel": "/v1/api/tests/cancel",
+            "get": "/v1/api/tests/get",
+            "preview-credits": "/v1/api/tests/preview-credits",
+            "set-sharing": "/v1/api/tests/set-sharing"
+        },
+        "crons": {
+            "list": "/v1/api/cron/list",
+            "add": "/v1/api/tests/add",
+            "remove": "/v1/api/cron/remove",
+            "get": "/v1/api/cron/get",
+            "preview-credits": "/v1/api/tests/preview-credits",
+            "set-sharing": "/v1/api/cron/set-status"
+        },
+        "results": {
+            "get": "/v1/api/summary-results/get"
+        }
+    }
+    return rungutan_paths[resource][verb]
