@@ -2,9 +2,8 @@
 
 ## What is Rungutan?
 
-[Rungutan](https://rungutan.com) is the first Load Testing Tool! 100% serverless, API driven & accessible for all tech professionals.
+[Rungutan](https://rungutan.com) is the first API Load Testing SaaS platform worldwide, 100% Serverless, which  helps you simulate workflows to emulate user experience, so it's easier to design workflow oriented strategies.
 
-As an evolved creature, Rungutan has extensive Load-Testing abilities, gained by experience, in order to survive in a fast-paced environment. Load Testing is its first language, so you will get along very well.
 
 ## Why use the CLI?
 
@@ -26,6 +25,7 @@ rungutan configure (--profile some-profile-name)
 ```
 
 * Check the overall help menu
+
 ```shell script
 $ rungutan help
 
@@ -51,6 +51,7 @@ optional arguments:
 ```
 
 * Check the help menu for a specific command
+
 ```shell script
 $ rungutan domain list --profile rungutan
 {
@@ -70,6 +71,7 @@ $ rungutan domain list --profile rungutan
 ## Run it as a docker container
 
 * Using local volume
+
 ```shell script
 $ docker run \
   -v ${HOME}/.runtugan:/root/.rungutan \
@@ -136,6 +138,5 @@ optional arguments:
                         "default" profile will be used. If no profiles are
                         defined, the following env variables will be checked:
                         * RUNGUTAN_TEAM_ID * RUNGUTAN_API_KEY
-
 
 ```

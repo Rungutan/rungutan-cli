@@ -15,8 +15,9 @@ setup(
 
     version=current_version,
 
-    description='CLI for Rungutan - the first Load Testing Tool! 100% serverless, '
-                'API driven & accessible for all tech professionals',
+    description='CLI for Rungutan - the first API Load Testing SaaS platform worldwide, '
+                '100% Serverless, which  helps you simulate workflows to emulate user experience, '
+                'so it\'s easier to design workflow oriented strategies.',
 
     long_description=long_description,
 
