@@ -53,7 +53,32 @@ optional arguments:
 * Check the help menu for a specific command
 
 ```shell script
-$ rungutan domain list --profile rungutan
+$ rungutan domain --help
+usage: rungutan [-h] [--domain_name DOMAIN_NAME] [-p PROFILE]
+                [{list,validate,remove,add}]
+
+Domain command system
+
+positional arguments:
+  {list,validate,remove,add}
+
+optional arguments:
+  -h, --help            show this help message and exit
+  --domain_name DOMAIN_NAME
+                        Required parameter for subcommand ["validate",
+                        "remove", "add"]
+  -p PROFILE, --profile PROFILE
+                        The profile you'll be using. If not specified, the
+                        "default" profile will be used. If no profiles are
+                        defined, the following env variables will be checked:
+                        * RUNGUTAN_TEAM_ID * RUNGUTAN_API_KEY
+
+```
+
+* Actually run a command
+
+```shell script
+$ rungutan domain list
 {
     "Domains": [
         {
