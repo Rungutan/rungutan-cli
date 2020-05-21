@@ -5,6 +5,17 @@
 [Rungutan](https://rungutan.com) is the first API Load Testing SaaS platform worldwide, 100% Serverless, which  helps you simulate workflows to emulate user experience, so it's easier to design workflow oriented strategies.
 
 
+## Where do I sign up?
+
+Althgouh we love our [landing page](https://rungutan.com) and we definitely think it's worth checking out, you can sign up directly by going on [https://app.rungutan.com](https://app.rungutan.com)
+
+## Do you have any ACTUAL documentation?
+
+D'oh.
+
+You can find it on our [Docs](https://docs.rungutan.com) page. 
+
+
 ## Why use the CLI?
 
 This CLI has been designed for:
