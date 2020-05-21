@@ -7,7 +7,7 @@ from rungutan.print_format import print_message
 def results(subcommand, profile_name, test_id, results_region):
 
     payload = {}
-    if subcommand in ["get", "failure-csv"]:
+    if subcommand in ["get"]:
         payload["test_id"] = test_id
 
     if subcommand in ["get"]:

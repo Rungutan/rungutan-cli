@@ -109,9 +109,9 @@ To see help text, you can run:
     def results(self):
         parser = argparse.ArgumentParser(
             description='Results command system')
-        parser.add_argument('subcommand', nargs='?', choices=["get", "failure-csv"])
+        parser.add_argument('subcommand', nargs='?', choices=["get"])
         parser.add_argument('--test_id', dest="test_id", default=None
-                            , help="Required parameter for subcommand [\"get\", \"failure-csv\"]")
+                            , help="Required parameter for subcommand [\"get\"]")
         parser.add_argument('--results_region', dest="results_region", default=None
                             , choices=["overall",
                                        "ap-northeast-2", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1",
@@ -127,10 +127,10 @@ To see help text, you can run:
 
         args = parser.parse_args(sys.argv[2:])
         if args.subcommand is None:
-            print('A subcommand from list must be supplied ["get", "failure-csv"]\n\n')
+            print('A subcommand from list must be supplied ["get"]\n\n')
             parser.print_help()
             exit(1)
-        if args.test_id is None and args.subcommand in ["get", "failure-csv"]:
+        if args.test_id is None and args.subcommand in ["get"]:
             print('Please specify a test ID using --test_id parameter')
             exit(1)
         if args.results_region is None and args.subcommand in ["get"]:
