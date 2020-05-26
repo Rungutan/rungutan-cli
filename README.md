@@ -45,11 +45,12 @@ usage: rungutan <command> [<args>]
 To see help text, you can run:
     rungutan help
     rungutan configure --help
-    rungutan domain --help
+    rungutan domains --help
     rungutan team --help
     rungutan results --help
     rungutan tests --help
     rungutan crons --help
+    rungutan notifications --help
 
 Rungutan CLI utility for interacting with https://rungutan.com
 
@@ -64,7 +65,7 @@ optional arguments:
 * Check the help menu for a specific command
 
 ```shell script
-$ rungutan domain --help
+$ rungutan domains --help
 usage: rungutan [-h] [--domain_name DOMAIN_NAME] [-p PROFILE]
                 [{list,validate,remove,add}]
 
@@ -89,7 +90,7 @@ optional arguments:
 * Actually run a command
 
 ```shell script
-$ rungutan domain list
+$ rungutan domains list
 {
     "Domains": [
         {
@@ -155,7 +156,7 @@ optional arguments:
 $ docker run \
   -e RUNGUTAN_TEAM_ID=my_team \
   -e RUNGUTAN_API_KEY=my_api_key \
-  rungutancommunity/rungutan-cli:latest "rungutan domain --help"
+  rungutancommunity/rungutan-cli:latest "rungutan domains --help"
 usage: rungutan [-h] [--domain_name DOMAIN_NAME] [-p PROFILE]
                 [{list,validate,remove,add}]
 

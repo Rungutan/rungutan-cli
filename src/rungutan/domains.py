@@ -4,7 +4,7 @@ from rungutan.config import path
 from rungutan.print_format import print_message
 
 
-def domain(subcommand, profile_name, domain_name):
+def domains(subcommand, profile_name, domain_name):
 
     payload = {}
     if subcommand != "list":

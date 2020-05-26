@@ -8,11 +8,12 @@ sys.path.append(os.path.normpath(os.path.join(SCRIPT_DIR, PACKAGE_PARENT)))
 
 from rungutan.configure import *
 from rungutan.config import *
-from rungutan.domain import *
+from rungutan.domains import *
 from rungutan.team import *
 from rungutan.tests import *
 from rungutan.results import *
 from rungutan.crons import *
+from rungutan.notifications import *
 
 
 class RungutanCLI(object):
@@ -25,11 +26,12 @@ class RungutanCLI(object):
 To see help text, you can run:
     rungutan help
     rungutan configure --help
-    rungutan domain --help
+    rungutan domains --help
     rungutan team --help
     rungutan results --help
     rungutan tests --help
     rungutan crons --help
+    rungutan notifications --help
 ''')
         parser.add_argument('command', help='Command to run')
         # parse_args defaults to [1:] for args, but you need to
@@ -52,7 +54,7 @@ To see help text, you can run:
         configure(args.profile)
 
     # noinspection PyMethodMayBeStatic
-    def domain(self):
+    def domains(self):
         parser = argparse.ArgumentParser(
             description='Domain command system')
         parser.add_argument('subcommand', nargs='?', choices=["list", "validate", "remove", "add"])
@@ -73,7 +75,75 @@ To see help text, you can run:
         if args.domain_name is None and args.subcommand in ["validate", "remove", "add"]:
             print('Please specify a domain name using --domain_name parameter')
             exit(1)
-        domain(args.subcommand, args.profile, args.domain_name)
+        domains(args.subcommand, args.profile, args.domain_name)
+
+    # noinspection PyMethodMayBeStatic
+    def notifications(self):
+        parser = argparse.ArgumentParser(
+            description='Notification command system')
+        parser.add_argument('subcommand', nargs='?', choices=["list", "remove", "add"])
+        parser.add_argument('--notification_id', dest="notification_id", default=None
+                            , help="Required parameter for subcommand [\"remove\"]")
+        parser.add_argument('--notification_channel', dest="notification_channel", default=None
+                            , help="Required parameter for subcommand [\"add\"]")
+        parser.add_argument('--notification_destination', dest="notification_destination", default=None
+                            , help="Required parameter for subcommand [\"add\"]."
+                                   "Based on whether the notification_channel is SLACK or EMAIL, provide"
+                                   "a valid Slack Incoming Webhook or a valid Email Address for this param")
+        parser.add_argument('--notification_failure_occurrences_threshold',
+                            dest="notification_failure_occurrences_threshold", default=None
+                            , help="Optional parameter for subcommand [\"add\"]."
+                                   "If this parameter is present, "
+                                   "then notification_success_response_time_threshold must"
+                                   "not be invoked")
+        parser.add_argument('--notification_success_response_time_threshold',
+                            dest="notification_success_response_time_threshold", default=None
+                            , help="Optional parameter for subcommand [\"add\"]."
+                                   "If this parameter is present, "
+                                   "then notification_failure_occurrences_threshold must"
+                                   "not be invoked")
+        parser.add_argument('-p', '--profile', dest='profile', default='default'
+                            , help='The profile you\'ll be using.\n'
+                                   'If not specified, the "default" profile will be used. \n'
+                                   'If no profiles are defined, the following env variables will be checked:\n'
+                                   '* {}\n'
+                                   '* {}'.format(os_env_team_id(), os_env_api_key()))
+
+        args = parser.parse_args(sys.argv[2:])
+        if args.subcommand is None:
+            print('A subcommand from list must be supplied ["list", "remove", "add"]\n\n')
+            parser.print_help()
+            exit(1)
+        if args.notification_id is None and args.subcommand in ["remove"]:
+            print('Please specify a notification id using --notification_id parameter')
+            exit(1)
+        if args.notification_channel is None and args.subcommand in ["add"]:
+            print('Please specify a notification channel using --notification_channel parameter')
+            exit(1)
+        if args.notification_destination is None and args.subcommand in ["add"]:
+            print('Please specify a notification endpoint using --notification_destination parameter')
+            exit(1)
+        if args.notification_failure_occurrences_threshold is None and args.subcommand in ["add"]:
+            if args.notification_success_response_time_threshold is None and args.subcommand in ["add"]:
+                print('Please specify a notification type using EITHER --notification_failure_occurrences_threshold '
+                      'parameter or --notification_success_response_time_threshold')
+                exit(1)
+        if args.notification_failure_occurrences_threshold is not None and args.subcommand in ["add"]:
+            if args.notification_success_response_time_threshold is not None and args.subcommand in ["add"]:
+                print('Please specify a notification type using EITHER --notification_failure_occurrences_threshold '
+                      'parameter or --notification_success_response_time_threshold')
+                exit(1)
+        error_type = None
+        error_threshold = 0
+        if args.notification_failure_occurrences_threshold is not None and args.subcommand in ["add"]:
+            error_type = "notification_failure_occurrences_threshold"
+            error_threshold = args.notification_failure_occurrences_threshold
+        if args.notification_success_response_time_threshold is not None and args.subcommand in ["add"]:
+            error_type = "notification_success_response_time_threshold"
+            error_threshold = args.notification_success_response_time_threshold
+
+        notifications(args.subcommand, args.profile, args.notification_id, args.notification_channel,
+                      args.notification_destination, error_type, error_threshold)
 
     # noinspection PyMethodMayBeStatic
     def team(self):

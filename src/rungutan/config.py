@@ -41,11 +41,16 @@ def test_finished_status():
 
 def path(resource, verb):
     rungutan_paths = {
-        "domain": {
+        "domains": {
             "list": "/v1/api/domains/list",
             "add": "/v1/api/domains/add",
             "remove": "/v1/api/domains/remove",
             "validate": "/v1/api/domains/validate"
+        },
+        "notifications": {
+            "list": "/v1/api/notifications/list",
+            "add": "/v1/api/notifications/add",
+            "remove": "/v1/api/notifications/remove"
         },
         "team": {
             "list": "/v1/api/membership/list",
