@@ -44,6 +44,7 @@ usage: rungutan <command> [<args>]
 
 To see help text, you can run:
     rungutan help
+    rungutan version
     rungutan configure --help
     rungutan domains --help
     rungutan team --help
