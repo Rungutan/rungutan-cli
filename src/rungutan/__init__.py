@@ -25,6 +25,7 @@ class RungutanCLI(object):
 
 To see help text, you can run:
     rungutan help
+    rungutan version
     rungutan configure --help
     rungutan domains --help
     rungutan team --help
@@ -52,6 +53,10 @@ To see help text, you can run:
                                    'If not specified, the "default" profile will be used')
         args = parser.parse_args(sys.argv[2:])
         configure(args.profile)
+
+    # noinspection PyMethodMayBeStatic
+    def version(self):
+        print("1.2.2")
 
     # noinspection PyMethodMayBeStatic
     def domains(self):
