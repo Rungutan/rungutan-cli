@@ -10,7 +10,7 @@ def domains(subcommand, profile_name, domain_name):
     if subcommand != "list":
         payload["domain_name"] = domain_name
 
-    domain_path = path("domain", subcommand)
+    domain_path = path("domains", subcommand)
 
     response = send_request(
         domain_path,
