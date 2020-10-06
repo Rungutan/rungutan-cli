@@ -11,6 +11,7 @@ from rungutan.config import *
 from rungutan.domains import *
 from rungutan.team import *
 from rungutan.tests import *
+from rungutan.templates import *
 from rungutan.results import *
 from rungutan.crons import *
 from rungutan.notifications import *
@@ -31,6 +32,7 @@ To see help text, you can run:
     rungutan team --help
     rungutan results --help
     rungutan tests --help
+    rungutan templates --help
     rungutan crons --help
     rungutan notifications --help
 ''')
@@ -56,7 +58,7 @@ To see help text, you can run:
 
     # noinspection PyMethodMayBeStatic
     def version(self):
-        print("1.2.2")
+        print("1.3.0")
 
     # noinspection PyMethodMayBeStatic
     def domains(self):
@@ -217,10 +219,11 @@ To see help text, you can run:
     def tests(self):
         parser = argparse.ArgumentParser(
             description='Tests command system')
-        parser.add_argument('subcommand', nargs='?', choices=["list", "add", "cancel",
+        parser.add_argument('subcommand', nargs='?', choices=["list", "add", "cancel", "remove",
                                                               "get", "preview-credits", "set-sharing"])
         parser.add_argument('--test_id', dest="test_id", default=None
-                            , help="Required parameter for subcommand [\"cancel\", \"get\", \"set-sharing\"].\n"
+                            , help="Required parameter for subcommand [\"cancel\", \"get\", "
+                                   "\"set-sharing\", \"remove\"].\n"
                                    "Optional parameter for subcommand [\"list\"]")
         parser.add_argument('--test_file', dest="test_file", type=argparse.FileType('r', encoding='UTF-8')
                             , default=None
@@ -243,11 +246,11 @@ To see help text, you can run:
 
         args = parser.parse_args(sys.argv[2:])
         if args.subcommand is None:
-            print('A subcommand from list must be supplied ["list", "add", "cancel", '
+            print('A subcommand from list must be supplied ["list", "add", "cancel", "remove", '
                   '"get", "preview-credits", "set-sharing"]\n\n')
             parser.print_help()
             exit(1)
-        if args.test_id is None and args.subcommand in ["cancel", "get", "set-sharing"]:
+        if args.test_id is None and args.subcommand in ["cancel", "get", "set-sharing", "remove"]:
             print('Please specify a test ID using --test_id parameter')
             exit(1)
         if args.test_public is None and args.subcommand in ["set-sharing"]:
@@ -256,11 +259,49 @@ To see help text, you can run:
         if args.test_file is None and args.subcommand in ["add", "preview-credits"]:
             print('Please specify a test file using --test_file parameter\n')
             print('Keep in mind the CLI also supports piping stdout to it, as well as specifying a file path:')
-            print("echo 'hello' | rungutan --test_file -")
-            print("rungutan --test_file file.json")
+            print("echo 'hello' | rungutan tests --test_file -")
+            print("rungutan tests --test_file file.json")
             exit(1)
         tests(args.subcommand, args.profile, args.test_id, args.test_file,
               args.test_public, args.test_name, args.wait_to_finish)
+
+    # noinspection PyMethodMayBeStatic
+    def templates(self):
+        parser = argparse.ArgumentParser(
+            description='Templates command system')
+        parser.add_argument('subcommand', nargs='?', choices=["list", "add", "remove", "get"])
+        parser.add_argument('--template_id', dest="template_id", default=None
+                            , help="Required parameter for subcommand [\"remove\", \"get\"].\n"
+                                   "Optional parameter for subcommand [\"list\"]")
+        parser.add_argument('--test_file', dest="test_file", type=argparse.FileType('r', encoding='UTF-8')
+                            , default=None
+                            , help="Required parameter for subcommand [\"add\"]")
+        parser.add_argument('--test_name', dest="test_name", default=None
+                            , help="Optional parameter for subcommand [\"add\"].\n"
+                                   "Use it to override the value for \"test_name\" in your test_file "
+                                   "or to simply specify a name for the template")
+        parser.add_argument('-p', '--profile', dest='profile', default='default'
+                            , help='The profile you\'ll be using.\n'
+                                   'If not specified, the "default" profile will be used. \n'
+                                   'If no profiles are defined, the following env variables will be checked:\n'
+                                   '* {}\n'
+                                   '* {}'.format(os_env_team_id(), os_env_api_key()))
+
+        args = parser.parse_args(sys.argv[2:])
+        if args.subcommand is None:
+            print('A subcommand from list must be supplied ["list", "add", "remove", "get"]\n\n')
+            parser.print_help()
+            exit(1)
+        if args.template_id is None and args.subcommand in ["remove", "get"]:
+            print('Please specify a template ID using --template_id parameter')
+            exit(1)
+        if args.test_file is None and args.subcommand in ["add"]:
+            print('Please specify a test file using --test_file parameter\n')
+            print('Keep in mind the CLI also supports piping stdout to it, as well as specifying a file path:')
+            print("echo 'hello' | rungutan templates --test_file -")
+            print("rungutan templates --test_file file.json")
+            exit(1)
+        templates(args.subcommand, args.profile, args.template_id, args.test_file, args.test_name)
 
     # noinspection PyMethodMayBeStatic
     def crons(self):

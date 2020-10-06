@@ -65,7 +65,14 @@ def path(resource, verb):
             "cancel": "/v1/api/tests/cancel",
             "get": "/v1/api/tests/get",
             "preview-credits": "/v1/api/tests/preview-credits",
-            "set-sharing": "/v1/api/tests/set-sharing"
+            "set-sharing": "/v1/api/tests/set-sharing",
+            "remove": "/v1/api/tests/remove"
+        },
+        "templates": {
+            "list": "/v1/api/templates/list",
+            "add": "/v1/api/templates/add",
+            "get": "/v1/api/templates/get",
+            "remove": "/v1/api/templates/remove"
         },
         "crons": {
             "list": "/v1/api/cron/list",

@@ -16,7 +16,7 @@ from rungutan.config import test_cancelled_status
 def tests(subcommand, profile_name, test_id, test_file, test_public, test_name, wait_to_finish):
 
     payload = {}
-    if subcommand in ["cancel", "get", "set-sharing", "list"]:
+    if subcommand in ["cancel", "get", "set-sharing", "list", "remove"]:
         if test_id is not None:
             payload["test_id"] = test_id
 
