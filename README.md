@@ -50,6 +50,7 @@ To see help text, you can run:
     rungutan team --help
     rungutan results --help
     rungutan tests --help
+    rungutan templates --help
     rungutan crons --help
     rungutan notifications --help
 
@@ -117,17 +118,17 @@ $ docker run \
 usage: rungutan [-h] [--test_id TEST_ID] [--test_file TEST_FILE]
                 [--test_public {public,private}] [--test_name TEST_NAME]
                 [--wait_to_finish] [-p PROFILE]
-                [{list,add,cancel,get,preview-credits,set-sharing}]
+                [{list,add,cancel,remove,get,preview-credits,set-sharing}]
 
 Tests command system
 
 positional arguments:
-  {list,add,cancel,get,preview-credits,set-sharing}
+  {list,add,cancel,remove,get,preview-credits,set-sharing}
 
 optional arguments:
   -h, --help            show this help message and exit
   --test_id TEST_ID     Required parameter for subcommand ["cancel", "get",
-                        "set-sharing"]. Optional parameter for subcommand
+                        "set-sharing","remove"]. Optional parameter for subcommand
                         ["list"]
   --test_file TEST_FILE
                         Required parameter for subcommand ["add", "preview-
