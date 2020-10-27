@@ -64,7 +64,7 @@ def path(resource, verb):
             "add": "/v1/api/tests/add",
             "cancel": "/v1/api/tests/cancel",
             "get": "/v1/api/tests/get",
-            "preview-credits": "/v1/api/tests/preview-credits",
+            "preview-credits": "/v1/api/credits/preview",
             "set-sharing": "/v1/api/tests/set-sharing",
             "remove": "/v1/api/tests/remove"
         },
@@ -79,7 +79,7 @@ def path(resource, verb):
             "add": "/v1/api/tests/add",
             "remove": "/v1/api/cron/remove",
             "get": "/v1/api/cron/get",
-            "preview-credits": "/v1/api/tests/preview-credits",
+            "preview-credits": "/v1/api/credits/preview",
             "set-status": "/v1/api/cron/set-status"
         },
         "results": {
