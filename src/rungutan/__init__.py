@@ -295,9 +295,19 @@ To see help text, you can run:
                             , help="Required parameter for subcommand [\"cancel\", \"get\", "
                                    "\"set-sharing\", \"remove\"].\n"
                                    "Optional parameter for subcommand [\"list\"]")
-        parser.add_argument('--test_file', dest="test_file", type=argparse.FileType('r', encoding='UTF-8')
-                            , default=None
-                            , help="Required parameter for subcommand [\"add\", \"preview-credits\"]")
+
+        test_case = parser.add_mutually_exclusive_group(required=True)
+
+        test_case.add_argument('--test_file', dest="test_file", type=argparse.FileType('r', encoding='UTF-8')
+                               , default=None
+                               , help="Required parameter for subcommand [\"add\", \"preview-credits\"]."
+                                      "You can specify --test_file or --template_id, but not both!")
+
+        test_case.add_argument('--template_id', dest="template_id"
+                               , default=None
+                               , help="Required parameter for subcommand [\"add\", \"preview-credits\"]"
+                                      "You can specify --test_file or --template_id, but not both!")
+
         parser.add_argument('--test_public', dest="test_public", default=None, choices=["public", "private"]
                             , help="Required parameter for subcommand [\"set-sharing\"]")
         parser.add_argument('--test_name', dest="test_name", default=None
@@ -326,13 +336,13 @@ To see help text, you can run:
         if args.test_public is None and args.subcommand in ["set-sharing"]:
             print('Please specify a value of either "public" or "private" for --test_public parameter')
             exit(1)
-        if args.test_file is None and args.subcommand in ["add", "preview-credits"]:
-            print('Please specify a test file using --test_file parameter\n')
+        if args.test_file is None and args.template_id is None and args.subcommand in ["add", "preview-credits"]:
+            print('Please specify a test case using either --test_file or --template_id parameters\n')
             print('Keep in mind the CLI also supports piping stdout to it, as well as specifying a file path:')
             print("echo 'hello' | rungutan tests --test_file -")
             print("rungutan tests --test_file file.json")
             exit(1)
-        tests(args.subcommand, args.profile, args.test_id, args.test_file,
+        tests(args.subcommand, args.profile, args.test_id, args.test_file, args.template_id,
               args.test_public, args.test_name, args.wait_to_finish)
 
     # noinspection PyMethodMayBeStatic

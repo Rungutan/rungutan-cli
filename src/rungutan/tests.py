@@ -13,7 +13,7 @@ from rungutan.config import test_finished_status
 from rungutan.config import test_cancelled_status
 
 
-def tests(subcommand, profile_name, test_id, test_file, test_public, test_name, wait_to_finish):
+def tests(subcommand, profile_name, test_id, test_file, template_id, test_public, test_name, wait_to_finish):
 
     payload = {}
     if subcommand in ["cancel", "get", "set-sharing", "list", "remove"]:
@@ -24,13 +24,30 @@ def tests(subcommand, profile_name, test_id, test_file, test_public, test_name, 
         payload["test_public"] = test_public
 
     if subcommand in ["add", "preview-credits"]:
-        try:
-            test_file = json.load(test_file)
-            for key in test_file:
-                payload[key] = test_file[key]
-        except Exception as e:
-            print(e)
-            exit(1)
+        if template_id is None:
+            try:
+                test_file = json.load(test_file)
+                for key in test_file:
+                    payload[key] = test_file[key]
+            except Exception as e:
+                print(e)
+                exit(1)
+        else:
+            payload_template = {
+                "template_id": template_id
+            }
+            templates_path = path("templates", "get")
+            templates_response = send_request(
+                templates_path,
+                payload_template,
+                auth(profile_name)
+            )
+            if templates_response["success"]:
+                for key in templates_response["response_json"]["TestData"]:
+                    payload[key] = templates_response["response_json"]["TestData"][key]
+            else:
+                print_message(templates_response["error"])
+                exit(1)
 
     if test_name is not None:
         payload["test_name"] = test_name
