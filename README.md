@@ -7,7 +7,7 @@
 
 ## Where do I sign up?
 
-Althgouh we love our [landing page](https://rungutan.com) and we definitely think it's worth checking out, you can sign up directly by going on [https://app.rungutan.com](https://app.rungutan.com)
+Although we love our [landing page](https://rungutan.com) and we definitely think it's worth checking out, you can sign up directly by going on [https://app.rungutan.com](https://app.rungutan.com)
 
 ## Do you have any ACTUAL documentation?
 
@@ -49,6 +49,7 @@ To see help text, you can run:
     rungutan domains --help
     rungutan team --help
     rungutan results --help
+    rungutan raw_results --help
     rungutan tests --help
     rungutan templates --help
     rungutan crons --help
