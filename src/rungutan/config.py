@@ -84,6 +84,9 @@ def path(resource, verb):
         },
         "results": {
             "get": "/v1/api/summary-results/get"
+        },
+        "raw_results": {
+            "get": "/v1/api/raw-results/get"
         }
     }
     return rungutan_paths[resource][verb]

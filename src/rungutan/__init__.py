@@ -13,6 +13,7 @@ from rungutan.team import *
 from rungutan.tests import *
 from rungutan.templates import *
 from rungutan.results import *
+from rungutan.raw_results import *
 from rungutan.crons import *
 from rungutan.notifications import *
 
@@ -31,6 +32,7 @@ To see help text, you can run:
     rungutan domains --help
     rungutan team --help
     rungutan results --help
+    rungutan raw_results --help
     rungutan tests --help
     rungutan templates --help
     rungutan crons --help
@@ -58,7 +60,7 @@ To see help text, you can run:
 
     # noinspection PyMethodMayBeStatic
     def version(self):
-        print("1.3.1")
+        print("1.4.0")
 
     # noinspection PyMethodMayBeStatic
     def domains(self):
@@ -214,6 +216,74 @@ To see help text, you can run:
             print('Please specify a region to fetch results for using --results_region parameter')
             exit(1)
         results(args.subcommand, args.profile, args.test_id, args.results_region)
+
+    # noinspection PyMethodMayBeStatic
+    def raw_results(self):
+        parser = argparse.ArgumentParser(
+            description='Raw results command system')
+        parser.add_argument('subcommand', nargs='?', choices=["get"])
+        parser.add_argument('--test_id', dest="test_id", default=None
+                            , help="Required parameter for subcommand [\"get\"]")
+        parser.add_argument('--results_region', dest="results_region", default=None
+                            , choices=["overall",
+                                       "ap-northeast-2", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1",
+                                       "eu-central-1", "eu-west-2", "eu-west-3", "eu-west-1", "us-east-1", "us-east-2",
+                                       "us-west-1", "us-west-2", "ca-central-1", "ap-south-1", "sa-east-1"]
+                            , help="Required parameter for subcommand [\"get\"]")
+        parser.add_argument('--results_type', dest="results_type", default="success"
+                            , choices=["success", "failure"])
+        parser.add_argument('--results_path', dest="results_path", default=None
+                            , help="Required parameter for subcommand [\"get\"]")
+        parser.add_argument('--results_method', dest="results_method", default=None
+                            , choices=["GET", "POST", "PATCH", "HEAD", "PUT", "DELETE", "OPTIONS"]
+                            , help="Required parameter for subcommand [\"get\"]")
+        parser.add_argument('--min_timestamp', dest="min_timestamp", default=None
+                            , help="EPOCH TIME FORMAT -> Required parameter for subcommand [\"get\"]")
+        parser.add_argument('--max_timestamp', dest="max_timestamp", default=None
+                            , help="EPOCH TIME FORMAT -> Required parameter for subcommand [\"get\"]")
+        parser.add_argument('-p', '--profile', dest='profile', default='default'
+                            , help='The profile you\'ll be using.\n'
+                                   'If not specified, the "default" profile will be used. \n'
+                                   'If no profiles are defined, the following env variables will be checked:\n'
+                                   '* {}\n'
+                                   '* {}'.format(os_env_team_id(), os_env_api_key()))
+
+        args = parser.parse_args(sys.argv[2:])
+        if args.subcommand is None:
+            print('A subcommand from list must be supplied ["get"]\n\n')
+            parser.print_help()
+            exit(1)
+        if args.test_id is None and args.subcommand in ["get"]:
+            print('Please specify a test ID using --test_id parameter')
+            exit(1)
+        if args.results_region is None and args.subcommand in ["get"]:
+            print('Please specify a region to fetch results for using --results_region parameter')
+            exit(1)
+        if args.results_type is None and args.subcommand in ["get"]:
+            print('Please specify a type of result using --results_type parameter')
+            exit(1)
+        if args.results_path is None and args.subcommand in ["get"]:
+            print('Please specify a path within your workflow\'s test_id using --results_path parameter for which '
+                  'you\'d like to get the raw results')
+            exit(1)
+        if args.results_method is None and args.subcommand in ["get"]:
+            print('Please specify the method related to the path within your workflow\'s test_id using '
+                  '--results_method '
+                  'parameter for which you\'d like to get the raw results')
+            exit(1)
+        if args.min_timestamp is None and args.subcommand in ["get"]:
+            print('Please specify the minimum timestamp in EPOCH TIME specific for your test_id  using '
+                  '--min_timestamp '
+                  'parameter for which you\'d like to get the raw results')
+            exit(1)
+        if args.max_timestamp is None and args.subcommand in ["get"]:
+            print('Please specify the maximum timestamp in EPOCH TIME specific for your test_id  using '
+                  '--max_timestamp '
+                  'parameter for which you\'d like to get the raw results')
+            exit(1)
+        raw_results(args.subcommand, args.profile, args.test_id, args.results_region,
+                    args.results_type, args.results_path, args.results_method,
+                    args.min_timestamp, args.max_timestamp)
 
     # noinspection PyMethodMayBeStatic
     def tests(self):
