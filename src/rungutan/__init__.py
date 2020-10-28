@@ -60,7 +60,7 @@ To see help text, you can run:
 
     # noinspection PyMethodMayBeStatic
     def version(self):
-        print("1.4.0")
+        print("1.5.0")
 
     # noinspection PyMethodMayBeStatic
     def domains(self):
@@ -300,12 +300,12 @@ To see help text, you can run:
 
         test_case.add_argument('--test_file', dest="test_file", type=argparse.FileType('r', encoding='UTF-8')
                                , default=None
-                               , help="Required parameter for subcommand [\"add\", \"preview-credits\"]."
+                               , help="Required parameter for subcommand [\"add\", \"preview-credits\"]. "
                                       "You can specify --test_file or --template_id, but not both!")
 
         test_case.add_argument('--template_id', dest="template_id"
                                , default=None
-                               , help="Required parameter for subcommand [\"add\", \"preview-credits\"]"
+                               , help="Required parameter for subcommand [\"add\", \"preview-credits\"]. "
                                       "You can specify --test_file or --template_id, but not both!")
 
         parser.add_argument('--test_public', dest="test_public", default=None, choices=["public", "private"]

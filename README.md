@@ -132,8 +132,9 @@ optional arguments:
                         "set-sharing","remove"]. Optional parameter for subcommand
                         ["list"]
   --test_file TEST_FILE
-                        Required parameter for subcommand ["add", "preview-
-                        credits"]
+                        Required parameter for subcommand ["add", "preview-credits"]. You can specify --test_file or --template_id, but not both!
+  --template_id TEMPLATE_ID
+                        Required parameter for subcommand ["add", "preview-credits"]. You can specify --test_file or --template_id, but not both!
   --test_public {public,private}
                         Required parameter for subcommand ["set-sharing"]
   --test_name TEST_NAME
