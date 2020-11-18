@@ -16,6 +16,7 @@ from rungutan.results import *
 from rungutan.raw_results import *
 from rungutan.crons import *
 from rungutan.notifications import *
+from rungutan.vault import *
 
 
 class RungutanCLI(object):
@@ -37,6 +38,7 @@ To see help text, you can run:
     rungutan templates --help
     rungutan crons --help
     rungutan notifications --help
+    rungutan vault --help
 ''')
         parser.add_argument('command', help='Command to run')
         # parse_args defaults to [1:] for args, but you need to
@@ -60,7 +62,7 @@ To see help text, you can run:
 
     # noinspection PyMethodMayBeStatic
     def version(self):
-        print("1.5.0")
+        print("1.6.0")
 
     # noinspection PyMethodMayBeStatic
     def domains(self):
@@ -96,18 +98,18 @@ To see help text, you can run:
         parser.add_argument('--notification_channel', dest="notification_channel", default=None
                             , help="Required parameter for subcommand [\"add\"]")
         parser.add_argument('--notification_destination', dest="notification_destination", default=None
-                            , help="Required parameter for subcommand [\"add\"]."
+                            , help="Required parameter for subcommand [\"add\"].\n"
                                    "Based on whether the notification_channel is SLACK or EMAIL, provide"
                                    "a valid Slack Incoming Webhook or a valid Email Address for this param")
         parser.add_argument('--notification_failure_occurrences_threshold',
                             dest="notification_failure_occurrences_threshold", default=None
-                            , help="Optional parameter for subcommand [\"add\"]."
+                            , help="Optional parameter for subcommand [\"add\"].\n"
                                    "If this parameter is present, "
                                    "then notification_success_response_time_threshold must"
                                    "not be invoked")
         parser.add_argument('--notification_success_response_time_threshold',
                             dest="notification_success_response_time_threshold", default=None
-                            , help="Optional parameter for subcommand [\"add\"]."
+                            , help="Optional parameter for subcommand [\"add\"].\n"
                                    "If this parameter is present, "
                                    "then notification_failure_occurrences_threshold must"
                                    "not be invoked")
@@ -300,12 +302,12 @@ To see help text, you can run:
 
         test_case.add_argument('--test_file', dest="test_file", type=argparse.FileType('r', encoding='UTF-8')
                                , default=None
-                               , help="Required parameter for subcommand [\"add\", \"preview-credits\"]. "
+                               , help="Required parameter for subcommand [\"add\", \"preview-credits\"]. \n"
                                       "You can specify --test_file or --template_id, but not both!")
 
         test_case.add_argument('--template_id', dest="template_id"
                                , default=None
-                               , help="Required parameter for subcommand [\"add\", \"preview-credits\"]. "
+                               , help="Required parameter for subcommand [\"add\", \"preview-credits\"]. \n"
                                       "You can specify --test_file or --template_id, but not both!")
 
         parser.add_argument('--test_public', dest="test_public", default=None, choices=["public", "private"]
@@ -459,6 +461,47 @@ To see help text, you can run:
               args.cron_enabled, args.test_name, args.schedule_type, args.schedule_hour,
               args.schedule_minute, args.schedule_weekday, args.schedule_day_of_month)
 
+    # noinspection PyMethodMayBeStatic
+    def vault(self):
+        parser = argparse.ArgumentParser(
+            description='Vault command system')
+        parser.add_argument('subcommand', nargs='?', choices=["list", "remove", "add", "get", "edit"])
+        parser.add_argument('--vault_id', dest="vault_id", default=None
+                            , help="Required parameter for subcommand [\"remove\", \"get\", \"edit\"]. \n"
+                                   "Optional parameter for subcommand [\"list\"].")
+        parser.add_argument('--key_storage_type', dest="key_storage_type", default=None
+                            , choices=["SENSITIVE", "PLAINTEXT"]
+                            , help="Required parameter for subcommand [\"add\", \"edit\"]")
+        parser.add_argument('--key_name', dest="key_name", default=None
+                            , help="Required parameter for subcommand [\"add\", \"edit\"]")
+        parser.add_argument('--key_value', dest="key_value", default=None
+                            , help="Required parameter for subcommand [\"add\", \"edit\"]")
+        parser.add_argument('-p', '--profile', dest='profile', default='default'
+                            , help='The profile you\'ll be using.\n'
+                                   'If not specified, the "default" profile will be used. \n'
+                                   'If no profiles are defined, the following env variables will be checked:\n'
+                                   '* {}\n'
+                                   '* {}'.format(os_env_team_id(), os_env_api_key()))
+
+        args = parser.parse_args(sys.argv[2:])
+        if args.subcommand is None:
+            print('A subcommand from list must be supplied ["list", "remove", "add", "get", "edit"]\n\n')
+            parser.print_help()
+            exit(1)
+        if args.vault_id is None and args.subcommand in ["remove", "get", "edit"]:
+            print('Please specify a vault id using --vault_id parameter')
+            exit(1)
+        if args.key_storage_type is None and args.subcommand in ["add", "edit"]:
+            print('Please specify a storage type using --key_storage_type parameter')
+            exit(1)
+        if args.key_name is None and args.subcommand in ["add", "edit"]:
+            print('Please specify a key name using --key_name parameter')
+            exit(1)
+        if args.key_value is None and args.subcommand in ["add", "edit"]:
+            print('Please specify a key value using --key_value parameter')
+            exit(1)
+
+        vault(args.subcommand, args.profile, args.vault_id, args.key_storage_type, args.key_name, args.key_value)
 
 def main():
     RungutanCLI()
