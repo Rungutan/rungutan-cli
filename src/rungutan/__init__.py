@@ -62,7 +62,7 @@ To see help text, you can run:
 
     # noinspection PyMethodMayBeStatic
     def version(self):
-        print("1.6.0")
+        print("1.6.1")
 
     # noinspection PyMethodMayBeStatic
     def domains(self):
@@ -298,7 +298,7 @@ To see help text, you can run:
                                    "\"set-sharing\", \"remove\"].\n"
                                    "Optional parameter for subcommand [\"list\"]")
 
-        test_case = parser.add_mutually_exclusive_group(required=True)
+        test_case = parser.add_mutually_exclusive_group(required=False)
 
         test_case.add_argument('--test_file', dest="test_file", type=argparse.FileType('r', encoding='UTF-8')
                                , default=None
