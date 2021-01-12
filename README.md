@@ -31,6 +31,7 @@ pip install rungutan
 ## How to run the CLI?
 
 * Set up your authentication mechanism using the Rungutan API key
+
 ```shell script
 rungutan configure (--profile some-profile-name)
 ```
