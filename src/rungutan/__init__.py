@@ -1,4 +1,5 @@
 import argparse
+from argparse import RawTextHelpFormatter
 import sys
 import os
 
@@ -23,6 +24,7 @@ class RungutanCLI(object):
 
     def __init__(self):
         parser = argparse.ArgumentParser(
+            formatter_class=RawTextHelpFormatter,
             description='Rungutan CLI utility for interacting with https://rungutan.com',
             usage='''rungutan <command> [<args>]
 
@@ -53,6 +55,7 @@ To see help text, you can run:
     # noinspection PyMethodMayBeStatic
     def configure(self):
         parser = argparse.ArgumentParser(
+            formatter_class=RawTextHelpFormatter,
             description='Configure local authentication system')
         parser.add_argument('-p', '--profile', dest='profile', default='default'
                             , help='The profile you\'ll be using.\n'
@@ -67,6 +70,7 @@ To see help text, you can run:
     # noinspection PyMethodMayBeStatic
     def domains(self):
         parser = argparse.ArgumentParser(
+            formatter_class=RawTextHelpFormatter,
             description='Domain command system')
         parser.add_argument('subcommand', nargs='?', choices=["list", "validate", "remove", "add"])
         parser.add_argument('--domain_name', dest="domain_name", default=None
@@ -91,6 +95,7 @@ To see help text, you can run:
     # noinspection PyMethodMayBeStatic
     def notifications(self):
         parser = argparse.ArgumentParser(
+            formatter_class=RawTextHelpFormatter,
             description='Notification command system')
         parser.add_argument('subcommand', nargs='?', choices=["list", "remove", "add"])
         parser.add_argument('--notification_id', dest="notification_id", default=None
@@ -159,6 +164,7 @@ To see help text, you can run:
     # noinspection PyMethodMayBeStatic
     def team(self):
         parser = argparse.ArgumentParser(
+            formatter_class=RawTextHelpFormatter,
             description='Team command system')
         parser.add_argument('subcommand', nargs='?', choices=["list", "change", "remove", "add", "get"])
         parser.add_argument('--member_email', dest="member_email", default=None
@@ -189,6 +195,7 @@ To see help text, you can run:
     # noinspection PyMethodMayBeStatic
     def results(self):
         parser = argparse.ArgumentParser(
+            formatter_class=RawTextHelpFormatter,
             description='Results command system')
         parser.add_argument('subcommand', nargs='?', choices=["get"])
         parser.add_argument('--test_id', dest="test_id", default=None
@@ -222,6 +229,7 @@ To see help text, you can run:
     # noinspection PyMethodMayBeStatic
     def raw_results(self):
         parser = argparse.ArgumentParser(
+            formatter_class=RawTextHelpFormatter,
             description='Raw results command system')
         parser.add_argument('subcommand', nargs='?', choices=["get"])
         parser.add_argument('--test_id', dest="test_id", default=None
@@ -290,6 +298,7 @@ To see help text, you can run:
     # noinspection PyMethodMayBeStatic
     def tests(self):
         parser = argparse.ArgumentParser(
+            formatter_class=RawTextHelpFormatter,
             description='Tests command system')
         parser.add_argument('subcommand', nargs='?', choices=["list", "add", "cancel", "remove",
                                                               "get", "preview-credits", "set-sharing"])
@@ -350,6 +359,7 @@ To see help text, you can run:
     # noinspection PyMethodMayBeStatic
     def templates(self):
         parser = argparse.ArgumentParser(
+            formatter_class=RawTextHelpFormatter,
             description='Templates command system')
         parser.add_argument('subcommand', nargs='?', choices=["list", "add", "remove", "get"])
         parser.add_argument('--template_id', dest="template_id", default=None
@@ -388,6 +398,7 @@ To see help text, you can run:
     # noinspection PyMethodMayBeStatic
     def crons(self):
         parser = argparse.ArgumentParser(
+            formatter_class=RawTextHelpFormatter,
             description='Crons command system')
         parser.add_argument('subcommand', nargs='?', choices=["list", "add", "remove",
                                                               "get", "preview-credits", "set-status"])
@@ -464,6 +475,7 @@ To see help text, you can run:
     # noinspection PyMethodMayBeStatic
     def vault(self):
         parser = argparse.ArgumentParser(
+            formatter_class=RawTextHelpFormatter,
             description='Vault command system')
         parser.add_argument('subcommand', nargs='?', choices=["list", "remove", "add", "get", "edit"])
         parser.add_argument('--vault_id', dest="vault_id", default=None

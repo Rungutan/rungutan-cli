@@ -55,12 +55,11 @@ setup(
         'License :: OSI Approved :: MIT License',
 
         # Supported Python versions
-        'Programming Language :: Python :: 3',
         'Programming Language :: Python :: 3.5',
         'Programming Language :: Python :: 3.6',
         'Programming Language :: Python :: 3.7',
         'Programming Language :: Python :: 3.8',
-        'Programming Language :: Python :: 3 :: Only',
+        'Programming Language :: Python :: 3.9'
     ],
 
     keywords='rungutan rungutan-cli rungutan_cli cli load testing load-testing load_testing stress'

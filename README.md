@@ -7,7 +7,7 @@
 
 ## Where do I sign up?
 
-Although we love our [landing page](https://rungutan.com) and we definitely think it's worth checking out, you can sign up directly by going on [https://app.rungutan.com](https://app.rungutan.com)
+Although we love our [landing page](https://rungutan.com) and we definitely think it's worth checking out, you can sign up directly by going on [https://app.rungutan.com/signup](https://app.rungutan.com/signup)
 
 ## Do you have any ACTUAL documentation?
 
@@ -54,6 +54,7 @@ To see help text, you can run:
     rungutan templates --help
     rungutan crons --help
     rungutan notifications --help
+    rungutan vault --help
 
 Rungutan CLI utility for interacting with https://rungutan.com
 
@@ -62,6 +63,7 @@ positional arguments:
 
 optional arguments:
   -h, --help  show this help message and exit
+
 
 ```
 
@@ -80,14 +82,13 @@ positional arguments:
 optional arguments:
   -h, --help            show this help message and exit
   --domain_name DOMAIN_NAME
-                        Required parameter for subcommand ["validate",
-                        "remove", "add"]
+                        Required parameter for subcommand ["validate", "remove", "add"]
   -p PROFILE, --profile PROFILE
-                        The profile you'll be using. If not specified, the
-                        "default" profile will be used. If no profiles are
-                        defined, the following env variables will be checked:
-                        * RUNGUTAN_TEAM_ID * RUNGUTAN_API_KEY
-
+                        The profile you'll be using.
+                        If not specified, the "default" profile will be used. 
+                        If no profiles are defined, the following env variables will be checked:
+                        * RUNGUTAN_TEAM_ID
+                        * RUNGUTAN_API_KEY
 ```
 
 * Actually run a command
@@ -128,30 +129,27 @@ positional arguments:
 
 optional arguments:
   -h, --help            show this help message and exit
-  --test_id TEST_ID     Required parameter for subcommand ["cancel", "get",
-                        "set-sharing","remove"]. Optional parameter for subcommand
-                        ["list"]
+  --test_id TEST_ID     Required parameter for subcommand ["cancel", "get", "set-sharing", "remove"].
+                        Optional parameter for subcommand ["list"]
   --test_file TEST_FILE
-                        Required parameter for subcommand ["add", "preview-credits"]. You can specify --test_file or --template_id, but not both!
+                        Required parameter for subcommand ["add", "preview-credits"]. 
+                        You can specify --test_file or --template_id, but not both!
   --template_id TEMPLATE_ID
-                        Required parameter for subcommand ["add", "preview-credits"]. You can specify --test_file or --template_id, but not both!
+                        Required parameter for subcommand ["add", "preview-credits"]. 
+                        You can specify --test_file or --template_id, but not both!
   --test_public {public,private}
                         Required parameter for subcommand ["set-sharing"]
   --test_name TEST_NAME
-                        Optional parameter for subcommand ["add", "preview-
-                        credits"]. Use it to override the value for
-                        "test_name" in your test_file or to simply specify a
-                        name for the test
-  --wait_to_finish      Optional parameter for subcommand ["add"] Use it to
-                        set the CLI to wait for the test to finish before
-                        exiting.
+                        Optional parameter for subcommand ["add", "preview-credits"].
+                        Use it to override the value for "test_name" in your test_file or to simply specify a name for the test
+  --wait_to_finish      Optional parameter for subcommand ["add"]
+                        Use it to set the CLI to wait for the test to finish before exiting.
   -p PROFILE, --profile PROFILE
-                        The profile you'll be using. If not specified, the
-                        "default" profile will be used. If no profiles are
-                        defined, the following env variables will be checked:
-                        * RUNGUTAN_TEAM_ID * RUNGUTAN_API_KEY
-
-
+                        The profile you'll be using.
+                        If not specified, the "default" profile will be used. 
+                        If no profiles are defined, the following env variables will be checked:
+                        * RUNGUTAN_TEAM_ID
+                        * RUNGUTAN_API_KEY
 ```
 
 * Or using environment variables
@@ -172,12 +170,12 @@ positional arguments:
 optional arguments:
   -h, --help            show this help message and exit
   --domain_name DOMAIN_NAME
-                        Required parameter for subcommand ["validate",
-                        "remove", "add"]
+                        Required parameter for subcommand ["validate", "remove", "add"]
   -p PROFILE, --profile PROFILE
-                        The profile you'll be using. If not specified, the
-                        "default" profile will be used. If no profiles are
-                        defined, the following env variables will be checked:
-                        * RUNGUTAN_TEAM_ID * RUNGUTAN_API_KEY
+                        The profile you'll be using.
+                        If not specified, the "default" profile will be used. 
+                        If no profiles are defined, the following env variables will be checked:
+                        * RUNGUTAN_TEAM_ID
+                        * RUNGUTAN_API_KEY
 
 ```
