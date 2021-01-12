@@ -15,7 +15,7 @@ def os_env_api_key():
 
 
 def hostname():
-    return "api.rungutan.com"
+    return "app.rungutan.com"
 
 
 def sleep_timeout():
