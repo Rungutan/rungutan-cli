@@ -116,8 +116,8 @@ $ rungutan domains list
 
 ```shell script
 $ docker run \
-  -v ${HOME}/.runtugan:/root/.rungutan \
-  rungutancommunity/rungutan-cli:latest "rungutan tests --help"
+  -v ${HOME}/.rungutan:/root/.rungutan \
+  rungutancommunity/rungutan-cli:latest rungutan tests --help
 usage: rungutan [-h] [--test_id TEST_ID] [--test_file TEST_FILE]
                 [--test_public {public,private}] [--test_name TEST_NAME]
                 [--wait_to_finish] [-p PROFILE]
@@ -159,7 +159,7 @@ optional arguments:
 $ docker run \
   -e RUNGUTAN_TEAM_ID=my_team \
   -e RUNGUTAN_API_KEY=my_api_key \
-  rungutancommunity/rungutan-cli:latest "rungutan domains --help"
+  rungutancommunity/rungutan-cli:latest rungutan domains --help
 usage: rungutan [-h] [--domain_name DOMAIN_NAME] [-p PROFILE]
                 [{list,validate,remove,add}]
 
