@@ -1,6 +1,6 @@
 FROM python:3.7-alpine
 
-RUN  pip install rungutan==1.6.1
+RUN  pip install rungutan==1.6.2
 
 VOLUME /root/.rungutan
 
