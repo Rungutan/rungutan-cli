@@ -9,8 +9,7 @@ from rungutan.print_format import print_message
 from rungutan.config import sleep_timeout
 from rungutan.config import test_running_status
 from rungutan.config import test_error_status
-from rungutan.config import test_finished_status
-from rungutan.config import test_cancelled_status
+from rungutan.config import test_completed_status
 
 
 def tests(subcommand, profile_name, test_id, test_file, template_id, test_public, test_name, wait_to_finish):
@@ -88,7 +87,7 @@ def tests(subcommand, profile_name, test_id, test_file, template_id, test_public
                         still_running = False
 
             # Print summary results
-            if test_status not in test_cancelled_status():
+            if test_status in test_completed_status():
                 results_path = path("results", "get")
                 response = send_request(
                     results_path,

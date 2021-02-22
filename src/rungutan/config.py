@@ -24,7 +24,8 @@ def sleep_timeout():
 
 def test_running_status():
     return ["STARTING", "VALIDATING", "REFRESHING_WORKERS", "STARTING_WORKERS", "RUNNING_LOADTEST",
-            "GENERATE_OVERALL_STATS", "GENERATE_FAILURE_CSV", "GENERATE_REGIONAL_STATS"]
+            "GENERATE_OVERALL_STATS", "GENERATE_FAILURE_CSV", "GENERATE_REGIONAL_STATS",
+            "GENERATE_DETAILED_STATS", "COMPUTE_OVERALL_RESULTS"]
 
 
 def test_error_status():
@@ -35,8 +36,8 @@ def test_cancelled_status():
     return ["CANCELLED"]
 
 
-def test_finished_status():
-    return ["FINISHED", "CANCELLED"]
+def test_completed_status():
+    return ["FINISHED"]
 
 
 def path(resource, verb):
