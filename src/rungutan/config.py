@@ -40,6 +40,10 @@ def test_completed_status():
     return ["FINISHED"]
 
 
+def test_finished_status():
+    return ["FINISHED", "CANCELLED"]
+
+
 def path(resource, verb):
     rungutan_paths = {
         "domains": {

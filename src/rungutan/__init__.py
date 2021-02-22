@@ -65,7 +65,7 @@ To see help text, you can run:
 
     # noinspection PyMethodMayBeStatic
     def version(self):
-        print("1.6.4")
+        print("1.6.5")
 
     # noinspection PyMethodMayBeStatic
     def domains(self):
