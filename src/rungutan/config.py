@@ -99,6 +99,16 @@ def path(resource, verb):
             "remove": "/v1/api/vault/remove",
             "get": "/v1/api/vault/get",
             "edit": "/v1/api/vault/edit"
+        },
+        "csv": {
+            "list": "/v1/api/csv/list",
+            "get": "/v1/api/csv/get",
+            "remove": "/v1/api/csv/remove"
+        },
+        "certificate": {
+            "list": "/v1/api/certificate/list",
+            "get": "/v1/api/certificate/get",
+            "remove": "/v1/api/certificate/remove"
         }
     }
     return rungutan_paths[resource][verb]
