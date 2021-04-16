@@ -56,6 +56,9 @@ To see help text, you can run:
     rungutan crons --help
     rungutan notifications --help
     rungutan vault --help
+    rungutan csv --help
+    rungutan certificate --help
+    rungutan file --help
 
 Rungutan CLI utility for interacting with https://rungutan.com
 
