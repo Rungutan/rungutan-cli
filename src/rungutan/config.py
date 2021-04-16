@@ -109,6 +109,11 @@ def path(resource, verb):
             "list": "/v1/api/certificate/list",
             "get": "/v1/api/certificate/get",
             "remove": "/v1/api/certificate/remove"
+        },
+        "file": {
+            "list": "/v1/api/file/list",
+            "get": "/v1/api/file/get",
+            "remove": "/v1/api/file/remove"
         }
     }
     return rungutan_paths[resource][verb]

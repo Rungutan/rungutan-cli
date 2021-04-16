@@ -20,6 +20,7 @@ from rungutan.notifications import *
 from rungutan.vault import *
 from rungutan.csv import *
 from rungutan.certificate import *
+from rungutan.file import *
 
 
 class RungutanCLI(object):
@@ -45,6 +46,7 @@ To see help text, you can run:
     rungutan vault --help
     rungutan csv --help
     rungutan certificate --help
+    rungutan file --help
 ''')
         parser.add_argument('command', help='Command to run')
         # parse_args defaults to [1:] for args, but you need to
@@ -69,7 +71,7 @@ To see help text, you can run:
 
     # noinspection PyMethodMayBeStatic
     def version(self):
-        print("1.7.0")
+        print("1.8.0")
 
     # noinspection PyMethodMayBeStatic
     def domains(self):
@@ -572,6 +574,33 @@ To see help text, you can run:
             exit(1)
 
         certificate(args.subcommand, args.profile, args.certificate_id)
+
+    # noinspection PyMethodMayBeStatic
+    def file(self):
+        parser = argparse.ArgumentParser(
+            formatter_class=RawTextHelpFormatter,
+            description='File command system')
+        parser.add_argument('subcommand', nargs='?', choices=["list", "get", "remove"])
+        parser.add_argument('--file_id', dest="file_id", default=None
+                            , help="Required parameter for subcommand [\"get\", \"remove\"]. \n"
+                                   "Optional parameter for subcommand [\"list\"].")
+        parser.add_argument('-p', '--profile', dest='profile', default='default'
+                            , help='The profile you\'ll be using.\n'
+                                   'If not specified, the "default" profile will be used. \n'
+                                   'If no profiles are defined, the following env variables will be checked:\n'
+                                   '* {}\n'
+                                   '* {}'.format(os_env_team_id(), os_env_api_key()))
+
+        args = parser.parse_args(sys.argv[2:])
+        if args.subcommand is None:
+            print('A subcommand from list must be supplied ["list", "get", "remove"]\n\n')
+            parser.print_help()
+            exit(1)
+        if args.certificate_id is None and args.subcommand in ["get", "remove"]:
+            print('Please specify a file id using --file_id parameter')
+            exit(1)
+
+        file(args.subcommand, args.profile, args.file_id)
 
 
 def main():
