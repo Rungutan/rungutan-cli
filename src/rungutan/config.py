@@ -49,8 +49,7 @@ def path(resource, verb):
         "domains": {
             "list": "/v1/api/domains/list",
             "add": "/v1/api/domains/add",
-            "remove": "/v1/api/domains/remove",
-            "validate": "/v1/api/domains/validate"
+            "remove": "/v1/api/domains/remove"
         },
         "notifications": {
             "list": "/v1/api/notifications/list",

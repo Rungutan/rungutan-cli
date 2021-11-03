@@ -9,11 +9,13 @@ import re
 def valid_team_id(team_id):
     if type(team_id) is not str:
         return False
-
-    if len(team_id) > 20:
+    if len(team_id) > 15:
         return False
-
-    pattern = re.compile("^[^0-9][a-zA-Z0-9]+$")
+    if len(team_id) < 2:
+        return False
+    if team_id[0] in ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]:
+        return False
+    pattern = re.compile("^[a-zA-Z0-9]+$")
     return pattern.match(team_id)
 
 

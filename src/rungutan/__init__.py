@@ -71,16 +71,16 @@ To see help text, you can run:
 
     # noinspection PyMethodMayBeStatic
     def version(self):
-        print("1.8.0")
+        print("1.9.0")
 
     # noinspection PyMethodMayBeStatic
     def domains(self):
         parser = argparse.ArgumentParser(
             formatter_class=RawTextHelpFormatter,
             description='Domain command system')
-        parser.add_argument('subcommand', nargs='?', choices=["list", "validate", "remove", "add"])
+        parser.add_argument('subcommand', nargs='?', choices=["list", "remove", "add"])
         parser.add_argument('--domain_name', dest="domain_name", default=None
-                            , help="Required parameter for subcommand [\"validate\", \"remove\", \"add\"]")
+                            , help="Required parameter for subcommand [\"remove\", \"add\"]")
         parser.add_argument('-p', '--profile', dest='profile', default='default'
                             , help='The profile you\'ll be using.\n'
                                    'If not specified, the "default" profile will be used. \n'
@@ -90,10 +90,10 @@ To see help text, you can run:
 
         args = parser.parse_args(sys.argv[2:])
         if args.subcommand is None:
-            print('A subcommand from list must be supplied ["list", "validate", "remove", "add"]\n\n')
+            print('A subcommand from list must be supplied ["list", "remove", "add"]\n\n')
             parser.print_help()
             exit(1)
-        if args.domain_name is None and args.subcommand in ["validate", "remove", "add"]:
+        if args.domain_name is None and args.subcommand in ["remove", "add"]:
             print('Please specify a domain name using --domain_name parameter')
             exit(1)
         domains(args.subcommand, args.profile, args.domain_name)

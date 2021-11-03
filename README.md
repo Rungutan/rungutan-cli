@@ -76,17 +76,17 @@ optional arguments:
 ```shell script
 $ rungutan domains --help
 usage: rungutan [-h] [--domain_name DOMAIN_NAME] [-p PROFILE]
-                [{list,validate,remove,add}]
+                [{list,remove,add}]
 
 Domain command system
 
 positional arguments:
-  {list,validate,remove,add}
+  {list,remove,add}
 
 optional arguments:
   -h, --help            show this help message and exit
   --domain_name DOMAIN_NAME
-                        Required parameter for subcommand ["validate", "remove", "add"]
+                        Required parameter for subcommand ["remove", "add"]
   -p PROFILE, --profile PROFILE
                         The profile you'll be using.
                         If not specified, the "default" profile will be used. 
@@ -103,11 +103,8 @@ $ rungutan domains list
     "Domains": [
         {
             "domain_name": "rungutan.com",
-            "domain_state": "validated",
-            "validation_method": "DNS",
             "submitted_date": "2020-01-22T09:43:08Z",
-            "validated_date": "2020-01-22T09:46:19Z",
-            "validation_code": "AQICAHhHp5r6gwXOjYqwtC9i+eAkDkjIWY6fFcvReCnBELkoNQE9gtS6zGZytyLbOH36UN9nAAAAZjBkBgkqhkiG9w0BBwagVzBVAgEAMFAGCSqGSIb3DQEHATAeBglghkgBZQMEAS4wEQQMEaZoxNmA88dZOjH1AgEQgCPHSkRXDs7qGl6lpEqoqA/K0deoSpuhveJihfstbYgTz6nQRg=="
+            "member_email": "owner@team.com"
         }
     ]
 }
@@ -164,17 +161,17 @@ $ docker run \
   -e RUNGUTAN_API_KEY=my_api_key \
   rungutancommunity/rungutan-cli:latest rungutan domains --help
 usage: rungutan [-h] [--domain_name DOMAIN_NAME] [-p PROFILE]
-                [{list,validate,remove,add}]
+                [{list,remove,add}]
 
 Domain command system
 
 positional arguments:
-  {list,validate,remove,add}
+  {list,remove,add}
 
 optional arguments:
   -h, --help            show this help message and exit
   --domain_name DOMAIN_NAME
-                        Required parameter for subcommand ["validate", "remove", "add"]
+                        Required parameter for subcommand ["remove", "add"]
   -p PROFILE, --profile PROFILE
                         The profile you'll be using.
                         If not specified, the "default" profile will be used. 
