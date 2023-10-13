@@ -9,7 +9,6 @@ sys.path.append(os.path.normpath(os.path.join(SCRIPT_DIR, PACKAGE_PARENT)))
 
 from rungutan.configure import *
 from rungutan.config import *
-from rungutan.domains import *
 from rungutan.team import *
 from rungutan.tests import *
 from rungutan.templates import *
@@ -19,7 +18,6 @@ from rungutan.crons import *
 from rungutan.notifications import *
 from rungutan.vault import *
 from rungutan.csv import *
-from rungutan.certificate import *
 from rungutan.file import *
 
 
@@ -35,7 +33,6 @@ To see help text, you can run:
     rungutan help
     rungutan version
     rungutan configure --help
-    rungutan domains --help
     rungutan team --help
     rungutan results --help
     rungutan raw_results --help
@@ -45,7 +42,6 @@ To see help text, you can run:
     rungutan notifications --help
     rungutan vault --help
     rungutan csv --help
-    rungutan certificate --help
     rungutan file --help
 ''')
         parser.add_argument('command', help='Command to run')
@@ -71,32 +67,7 @@ To see help text, you can run:
 
     # noinspection PyMethodMayBeStatic
     def version(self):
-        print("1.9.0")
-
-    # noinspection PyMethodMayBeStatic
-    def domains(self):
-        parser = argparse.ArgumentParser(
-            formatter_class=RawTextHelpFormatter,
-            description='Domain command system')
-        parser.add_argument('subcommand', nargs='?', choices=["list", "remove", "add"])
-        parser.add_argument('--domain_name', dest="domain_name", default=None
-                            , help="Required parameter for subcommand [\"remove\", \"add\"]")
-        parser.add_argument('-p', '--profile', dest='profile', default='default'
-                            , help='The profile you\'ll be using.\n'
-                                   'If not specified, the "default" profile will be used. \n'
-                                   'If no profiles are defined, the following env variables will be checked:\n'
-                                   '* {}\n'
-                                   '* {}'.format(os_env_team_id(), os_env_api_key()))
-
-        args = parser.parse_args(sys.argv[2:])
-        if args.subcommand is None:
-            print('A subcommand from list must be supplied ["list", "remove", "add"]\n\n')
-            parser.print_help()
-            exit(1)
-        if args.domain_name is None and args.subcommand in ["remove", "add"]:
-            print('Please specify a domain name using --domain_name parameter')
-            exit(1)
-        domains(args.subcommand, args.profile, args.domain_name)
+        print("1.10.0")
 
     # noinspection PyMethodMayBeStatic
     def notifications(self):
@@ -549,33 +520,6 @@ To see help text, you can run:
         csv(args.subcommand, args.profile, args.csv_id)
 
     # noinspection PyMethodMayBeStatic
-    def certificate(self):
-        parser = argparse.ArgumentParser(
-            formatter_class=RawTextHelpFormatter,
-            description='Certificate command system')
-        parser.add_argument('subcommand', nargs='?', choices=["list", "get", "remove"])
-        parser.add_argument('--certificate_id', dest="certificate_id", default=None
-                            , help="Required parameter for subcommand [\"get\", \"remove\"]. \n"
-                                   "Optional parameter for subcommand [\"list\"].")
-        parser.add_argument('-p', '--profile', dest='profile', default='default'
-                            , help='The profile you\'ll be using.\n'
-                                   'If not specified, the "default" profile will be used. \n'
-                                   'If no profiles are defined, the following env variables will be checked:\n'
-                                   '* {}\n'
-                                   '* {}'.format(os_env_team_id(), os_env_api_key()))
-
-        args = parser.parse_args(sys.argv[2:])
-        if args.subcommand is None:
-            print('A subcommand from list must be supplied ["list", "get", "remove"]\n\n')
-            parser.print_help()
-            exit(1)
-        if args.certificate_id is None and args.subcommand in ["get", "remove"]:
-            print('Please specify a certificate id using --certificate_id parameter')
-            exit(1)
-
-        certificate(args.subcommand, args.profile, args.certificate_id)
-
-    # noinspection PyMethodMayBeStatic
     def file(self):
         parser = argparse.ArgumentParser(
             formatter_class=RawTextHelpFormatter,
@@ -596,7 +540,7 @@ To see help text, you can run:
             print('A subcommand from list must be supplied ["list", "get", "remove"]\n\n')
             parser.print_help()
             exit(1)
-        if args.certificate_id is None and args.subcommand in ["get", "remove"]:
+        if args.file_id is None and args.subcommand in ["get", "remove"]:
             print('Please specify a file id using --file_id parameter')
             exit(1)
 

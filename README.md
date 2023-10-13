@@ -47,7 +47,6 @@ To see help text, you can run:
     rungutan help
     rungutan version
     rungutan configure --help
-    rungutan domains --help
     rungutan team --help
     rungutan results --help
     rungutan raw_results --help
@@ -57,7 +56,6 @@ To see help text, you can run:
     rungutan notifications --help
     rungutan vault --help
     rungutan csv --help
-    rungutan certificate --help
     rungutan file --help
 
 Rungutan CLI utility for interacting with https://rungutan.com
@@ -74,22 +72,21 @@ optional arguments:
 * Check the help menu for a specific command
 
 ```shell script
-$ rungutan domains --help
-usage: rungutan [-h] [--domain_name DOMAIN_NAME] [-p PROFILE]
-                [{list,remove,add}]
+$  rungutan csv --help
+usage: rungutan [-h] [--csv_id CSV_ID] [-p PROFILE] [{list,get,remove}]
 
-Domain command system
+CSV command system
 
 positional arguments:
-  {list,remove,add}
+  {list,get,remove}
 
 optional arguments:
   -h, --help            show this help message and exit
-  --domain_name DOMAIN_NAME
-                        Required parameter for subcommand ["remove", "add"]
+  --csv_id CSV_ID       Required parameter for subcommand ["get", "remove"].
+                        Optional parameter for subcommand ["list"].
   -p PROFILE, --profile PROFILE
                         The profile you'll be using.
-                        If not specified, the "default" profile will be used. 
+                        If not specified, the "default" profile will be used.
                         If no profiles are defined, the following env variables will be checked:
                         * RUNGUTAN_TEAM_ID
                         * RUNGUTAN_API_KEY
@@ -98,13 +95,16 @@ optional arguments:
 * Actually run a command
 
 ```shell script
-$ rungutan domains list
+$ rungutan csv list
 {
-    "Domains": [
+    "CSV": [
         {
-            "domain_name": "rungutan.com",
-            "submitted_date": "2020-01-22T09:43:08Z",
-            "member_email": "owner@team.com"
+            "csv_id": "9c30cffe-ea4b-440e-aa73-9182ab98eb80",
+            "file_name_csv": "sample",
+            "member_email": "support@rungutan.com",
+            "uploaded_date": "2021-10-05T11:25:11Z",
+            "max_rows": "25",
+            "max_columns": "7"
         }
     ]
 }
@@ -117,37 +117,21 @@ $ rungutan domains list
 ```shell script
 $ docker run \
   -v ${HOME}/.rungutan:/root/.rungutan \
-  rungutancommunity/rungutan-cli:latest rungutan tests --help
-usage: rungutan [-h] [--test_id TEST_ID] [--test_file TEST_FILE]
-                [--test_public {public,private}] [--test_name TEST_NAME]
-                [--wait_to_finish] [-p PROFILE]
-                [{list,add,cancel,remove,get,preview-credits,set-sharing}]
+  rungutancommunity/rungutan-cli:latest rungutan csv --help
+usage: rungutan [-h] [--csv_id CSV_ID] [-p PROFILE] [{list,get,remove}]
 
-Tests command system
+CSV command system
 
 positional arguments:
-  {list,add,cancel,remove,get,preview-credits,set-sharing}
+  {list,get,remove}
 
 optional arguments:
   -h, --help            show this help message and exit
-  --test_id TEST_ID     Required parameter for subcommand ["cancel", "get", "set-sharing", "remove"].
-                        Optional parameter for subcommand ["list"]
-  --test_file TEST_FILE
-                        Required parameter for subcommand ["add", "preview-credits"]. 
-                        You can specify --test_file or --template_id, but not both!
-  --template_id TEMPLATE_ID
-                        Required parameter for subcommand ["add", "preview-credits"]. 
-                        You can specify --test_file or --template_id, but not both!
-  --test_public {public,private}
-                        Required parameter for subcommand ["set-sharing"]
-  --test_name TEST_NAME
-                        Optional parameter for subcommand ["add", "preview-credits"].
-                        Use it to override the value for "test_name" in your test_file or to simply specify a name for the test
-  --wait_to_finish      Optional parameter for subcommand ["add"]
-                        Use it to set the CLI to wait for the test to finish before exiting.
+  --csv_id CSV_ID       Required parameter for subcommand ["get", "remove"].
+                        Optional parameter for subcommand ["list"].
   -p PROFILE, --profile PROFILE
                         The profile you'll be using.
-                        If not specified, the "default" profile will be used. 
+                        If not specified, the "default" profile will be used.
                         If no profiles are defined, the following env variables will be checked:
                         * RUNGUTAN_TEAM_ID
                         * RUNGUTAN_API_KEY
@@ -159,22 +143,21 @@ optional arguments:
 $ docker run \
   -e RUNGUTAN_TEAM_ID=my_team \
   -e RUNGUTAN_API_KEY=my_api_key \
-  rungutancommunity/rungutan-cli:latest rungutan domains --help
-usage: rungutan [-h] [--domain_name DOMAIN_NAME] [-p PROFILE]
-                [{list,remove,add}]
+  rungutancommunity/rungutan-cli:latest rungutan csv --help
+usage: rungutan [-h] [--csv_id CSV_ID] [-p PROFILE] [{list,get,remove}]
 
-Domain command system
+CSV command system
 
 positional arguments:
-  {list,remove,add}
+  {list,get,remove}
 
 optional arguments:
   -h, --help            show this help message and exit
-  --domain_name DOMAIN_NAME
-                        Required parameter for subcommand ["remove", "add"]
+  --csv_id CSV_ID       Required parameter for subcommand ["get", "remove"].
+                        Optional parameter for subcommand ["list"].
   -p PROFILE, --profile PROFILE
                         The profile you'll be using.
-                        If not specified, the "default" profile will be used. 
+                        If not specified, the "default" profile will be used.
                         If no profiles are defined, the following env variables will be checked:
                         * RUNGUTAN_TEAM_ID
                         * RUNGUTAN_API_KEY
